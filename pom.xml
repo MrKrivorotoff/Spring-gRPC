@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>4.0.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>spring-grpc</artifactId>
@@ -23,10 +23,12 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-services</artifactId>
+            <version>${grpc.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.grpc</groupId>
             <artifactId>spring-grpc-spring-boot-starter</artifactId>
+            <version>${spring-grpc.version}</version>
         </dependency>
 
         <dependency>
