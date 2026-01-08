@@ -31,11 +31,10 @@ public final class GrpcServerService extends SimpleGrpc.SimpleImplBase {
     public void streamHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
         final String name = request.getName();
         log.info("Hello " + name);
-        int count = 0;
-        while (count < 10) {
-            HelloReply reply = HelloReply.newBuilder().setMessage("Hello(" + count + ") ==> " + name).build();
+        for (int count = 0; count < 10; count++) {
+            final String message = String.format("Hello(%s) ==> %s", count, name);
+            final HelloReply reply = HelloReply.newBuilder().setMessage(message).build();
             responseObserver.onNext(reply);
-            count++;
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
