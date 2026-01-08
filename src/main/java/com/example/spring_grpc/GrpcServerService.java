@@ -14,24 +14,26 @@ public final class GrpcServerService extends SimpleGrpc.SimpleImplBase {
 
     @Override
     public void sayHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        log.info("Hello " + request.getName());
-        if (request.getName().startsWith("error")) {
-            throw new IllegalArgumentException("Bad name: " + request.getName());
+        final String name = request.getName();
+        log.info("Hello " + name);
+        if (name.startsWith("error")) {
+            throw new IllegalArgumentException("Bad name: " + name);
         }
-        if (request.getName().startsWith("internal")) {
+        if (name.startsWith("internal")) {
             throw new RuntimeException();
         }
-        HelloReply reply = HelloReply.newBuilder().setMessage("Hello ==> " + request.getName()).build();
+        HelloReply reply = HelloReply.newBuilder().setMessage("Hello ==> " + name).build();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
 
     @Override
     public void streamHello(HelloRequest request, StreamObserver<HelloReply> responseObserver) {
-        log.info("Hello " + request.getName());
+        final String name = request.getName();
+        log.info("Hello " + name);
         int count = 0;
         while (count < 10) {
-            HelloReply reply = HelloReply.newBuilder().setMessage("Hello(" + count + ") ==> " + request.getName()).build();
+            HelloReply reply = HelloReply.newBuilder().setMessage("Hello(" + count + ") ==> " + name).build();
             responseObserver.onNext(reply);
             count++;
             try {
