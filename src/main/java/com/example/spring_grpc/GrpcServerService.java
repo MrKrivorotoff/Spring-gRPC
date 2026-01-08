@@ -32,7 +32,7 @@ public final class GrpcServerService extends SimpleGrpc.SimpleImplBase {
         final String name = request.getName();
         log.info("Hello " + name);
         for (int count = 0; count < 10; count++) {
-            final String message = String.format("Hello(%s) ==> %s", count, name);
+            final String message = "Hello(" + count + ") ==> " + name;
             final HelloReply reply = HelloReply.newBuilder().setMessage(message).build();
             responseObserver.onNext(reply);
             try {
